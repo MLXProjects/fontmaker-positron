@@ -9,6 +9,8 @@ Hardcoded defaults:
 - font size fixed to 5x10
 - uses byte variables for each character row
 - spacing between characters: 5x4
+## NOTE
+After generating the font.bas file, MAKE SURE to remove the comma at the last byte variable so it compiles. This isn't automatic since I didn't find a decent way to do that, it oculd be done using the ftruncate function but I have no time to test that.
 ## How to compile
 Just install libaroma and use the following command:  
 `gcc main.c -o mkfont -laroma`
