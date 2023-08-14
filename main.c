@@ -30,7 +30,6 @@ int main(int argc, char **argv){
 	int x, y, char_x, char_y, char_w=5, char_h=10;
 	for (char_y=0; char_y<image->h; char_y+=14){
 		for (char_x=0; char_x<image->w; char_x+=10){
-			/* exit loop if last (standard) ASCII character & limit not disabled by argument */
 			for (y=0; y<char_h; y++){
 				offset=((char_y+y)*image->w)+char_x;
 				fprintf(out, "%%");
@@ -50,6 +49,7 @@ int main(int argc, char **argv){
 				fprintf(out, "_\t\t\t\t\' Code for char %c %d\n\t\t", char_ascii, char_index);
 			}
 			else fprintf(out, "_\t\t\t\t\' Code for char %c\n\t\t", char_ascii);
+			/* exit loop if last (standard) ASCII character & limit not disabled by argument */
 			if (char_ascii == '~' && !ascii_continue) goto done;
 			++char_ascii;
 			char_index += 10;
