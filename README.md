@@ -4,7 +4,7 @@ Generate PositronBASIC font from PNG ASCII map
 Written in C, it uses [libaroma](https://github.com/MLXProjects/libaroma) for simple image parsing.  
 ## Creating a font include file
 Draw a PNG file containing all ASCII characters, ordered from top-left to bottom-right, respecting font image specs.  
-Name it `"<width>x<height>.png"` and pass it's size when running fontmaker, e.g. `fontmaker 5x9`  
+Name it `"<width>x<height>.png"` and run fontmaker using it's size as parameter, e.g. `./fontmaker 5x9`  
 If everything works, you should see a `"<width>x<height>.inc"` file in the folder you ran fontmaker.  
 Include that file on your source code and use it :D  
 ## Font image specs
