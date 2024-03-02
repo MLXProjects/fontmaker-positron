@@ -1,24 +1,38 @@
 # pbasic-mkfont
-Make ProtonBASIC font data from PNG ASCII map
-
+Generate PositronBASIC font from PNG ASCII map
 ## Info
-Written in C, uses [libaroma](https://github.com/MLXProjects/libaroma) for simple image parsing.  
-This program uses alpha channel for defining character bits used.  
-Hardcoded defaults:
-- font PNG must be called image.png and will output code to font.bas
-- font size fixed to 5x10
-- uses byte variables for each character row
-- spacing between characters: 5x4
-## NOTE
-After generating the font.bas file, MAKE SURE to remove the comma at the last byte variable so it compiles. This isn't automatic since I didn't find a decent way to do that, it oculd be done using the ftruncate function but I have no time to test that.
+Written in C, it uses [libaroma](https://github.com/MLXProjects/libaroma) for simple image parsing.  
+## Creating a font include file
+Draw a PNG file containing all ASCII characters, ordered from top-left to bottom-right, respecting font image specs.  
+Name it `"<width>x<height>.png"` and pass it's size when running fontmaker, e.g. `fontmaker 5x9`  
+If everything works, you should see a `"<width>x<height>.inc"` file in the folder you ran fontmaker.  
+Include that file on your source code and use it :D  
+## Font image specs
+- background color: white (any bright enough color should work)
+- character color: black (any dark enough color should work)
+- first character: space (yes, it's just an empty rectangle)
+- padding between characters: 5x4 (5 horizontal, 4 vertical)
+- max width: 32 (Positron BASIC doesn't support bigger variable sizes)
+- last character: ~ (you can keep drawing after this one, just make sure to enable custom chars)
 ## How to compile
-Just install libaroma and use the following command:  
+Just build/install libaroma and use the following command:  
 `gcc main.c -o mkfont -laroma`
-## Command-line parameters
-The only supported parameter is `-c`, which makes program continue parsing after ~ character (last printable in ASCII code). It's useful to add custom characters/glyphs to your font.
+## Command-line help
+```
+Usage: fontmaker [OPTION] [WxH]
+
+Options:
+  -c		Generate custom characters using values after last ASCII character (~)
+  WxH		Sets the font width and height to use
+		Defaults to 5x10
+  -h		Shows this help message
+
+Examples:
+  fontmaker -c 5x9
+  fontmaker 4x7
+```
 ## TODO:
-- make all hardcoded things configurable please
-- add lots of command-line parameters
-- cleanup? idk
+- explain this all better pls
+- add a few command line parameters? idk
 ## License
 As always, my beloved Apache 2.0 license covers this code, just like libaroma :)
